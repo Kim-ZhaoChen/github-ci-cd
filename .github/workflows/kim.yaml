@@ -76,8 +76,7 @@ jobs:
           format: "table"
           ignore-unfixed: true
           severity: "HIGH"
-          format: 'table'
-          output: 'report.txt'
+          output: "report.txt"
 
       - name: Send GitHub Action trigger data to Slack workflow
         uses: rtCamp/action-slack-notify@v2
@@ -91,6 +90,6 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_type: 'text'
-          file_name: 'report.txt'
-          initial_comment: 'Failed report by ZHAO CHEN'
+          file_type: "text"
+          file_name: "report.txt"
+          initial_comment: "Failed report by ZHAO CHEN"
