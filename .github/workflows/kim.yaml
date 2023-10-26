@@ -1,0 +1,23 @@
+name: GitHub CICD
+
+on:
+  push:
+    branches:
+      - 'v[0-9]+.[0-9]+'
+
+jobs:
+  build:
+    if: ${{ startsWith(github.event.head_commit.message, '#norun') != true }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send GitHub Action trigger data to Slack workflow
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: "Image build and signed"
+          SLACK_MESSAGE: |
+            Name: ZHAO CHEN
+            Matriculation: A0269561U
+            Email: e1112944@u.nus.edu
+            GitHub: https://github.com/repo/code.git
+            Docker: https://hub.docker.com/repository/docker/username/repo/general
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
