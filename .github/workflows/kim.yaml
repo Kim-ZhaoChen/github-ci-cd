@@ -51,3 +51,18 @@ jobs:
             GitHub: https://github.com/Kim-ZhaoChen/github-ci-cd
             Docker: https://hub.docker.com/repository/docker/username/repo/general
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  job2:
+    if: ${{ startsWith(github.event.head_commit.message, '#norun') != true }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          format: "table"
+          ignore-unfixed: true
+          severity: "CRITICAL"
