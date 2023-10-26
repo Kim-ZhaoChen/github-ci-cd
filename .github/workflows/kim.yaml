@@ -66,3 +66,11 @@ jobs:
           format: "table"
           ignore-unfixed: true
           severity: "CRITICAL"
+
+      - name: Send GitHub Action trigger data to Slack workflow
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: "Scan failed - kim"
+          SLACK_MESSAGE: |
+            Fail trivy scan, see uploaded report
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
