@@ -65,7 +65,9 @@ jobs:
           scan-type: "fs"
           format: "table"
           ignore-unfixed: true
-          severity: "CRITICAL"
+          severity: "HIGH"
+          format: 'table'
+          output: 'report.txt'
 
       - name: Send GitHub Action trigger data to Slack workflow
         uses: rtCamp/action-slack-notify@v2
@@ -74,3 +76,5 @@ jobs:
           SLACK_MESSAGE: |
             Fail trivy scan, see uploaded report
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      
