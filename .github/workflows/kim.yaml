@@ -33,12 +33,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: kimzhao1307/kim-zhaochen:latest
+   
 
       - name: Send GitHub Action trigger data to Slack workflow
         uses: rtCamp/action-slack-notify@v2
@@ -59,6 +54,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          format: "table"
+          ignore-unfixed: true
+          severity: "HIGH"
+          format: 'table'
+          output: 'report.txt'
+
       - name: Send GitHub Action trigger data to Slack workflow
         uses: rtCamp/action-slack-notify@v2
         env:
@@ -66,3 +71,5 @@ jobs:
           SLACK_MESSAGE: |
             Fail trivy scan, see uploaded report
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      
