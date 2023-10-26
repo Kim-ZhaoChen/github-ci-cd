@@ -84,5 +84,3 @@ jobs:
           file_type: 'text'
           file_name: 'report.txt'
           initial_comment: 'Failed report by ZHAO CHEN'
-
-      
