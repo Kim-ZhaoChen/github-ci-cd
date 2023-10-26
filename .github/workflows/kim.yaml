@@ -33,7 +33,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-   
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: kimzhao1307/kim-zhaochen:latest
 
       - name: Send GitHub Action trigger data to Slack workflow
         uses: rtCamp/action-slack-notify@v2
@@ -71,5 +76,13 @@ jobs:
           SLACK_MESSAGE: |
             Fail trivy scan, see uploaded report
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - uses: MeilCli/slack-upload-file@v3
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          file_type: 'text'
+          file_name: 'report.txt'
+          initial_comment: 'Failed report by ZHAO CHEN'
 
       
