@@ -3,7 +3,7 @@ name: GitHub CICD
 on:
   push:
     branches:
-      - 'v[0-9]+.[0-9]+'
+      - "v[0-9]+.[0-9]+"
 
 jobs:
   build:
@@ -18,6 +18,6 @@ jobs:
             Name: ZHAO CHEN
             Matriculation: A0269561U
             Email: e1112944@u.nus.edu
-            GitHub: https://github.com/repo/code.git
+            GitHub: https://github.com/Kim-ZhaoChen/github-ci-cd
             Docker: https://hub.docker.com/repository/docker/username/repo/general
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
